@@ -10,6 +10,9 @@ import {useSelector} from 'react-redux';
 export default function Rightbar({otheruser}) {
     const {user} = useSelector(state=>state.UserReducer);
     console.log('user from rightbar is',user);
+    console.log('otheruser is',otheruser);
+
+
     const [friends, setfriends] = useState([]);
     const [followed, setfollowed] = useState(
       user?.followings.includes(otheruser?.id)
@@ -95,7 +98,7 @@ export default function Rightbar({otheruser}) {
         </div>
         <h4 className="rightbarTitle">User friends</h4>
         <div className="rightbarFollowings">
-          {friends.map((friend) => (
+          {friends?.map((friend) => (
             <Link
               to={"/profile/" + friend.username}
               style={{ textDecoration: "none" }}

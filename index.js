@@ -201,13 +201,9 @@ app.use(morgan("common"));
 if (process.env.NODE_ENV==="production"){
   app.use(express.static(path.join(__dirname,"/client/build")));
 
-  app.get("/home",(req,res)=>{
+  app.get("/",(req,res)=>{
     res.sendFile(path.join(__dirname,"client","build","index.html"));});
   
-}else {
-  app.get("/",(req,res)=>{
-    res.send("Api running");
-  })
 }
 
 mongoose.connect(
