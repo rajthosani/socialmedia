@@ -199,10 +199,10 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 if (process.env.NODE_ENV==="production"){
-  app.use(express.static("C:/Users/Raj/socialmedia/client/build"));
+  app.use(express.static(path.join(__dirname,"/client/build")));
 
   app.get("/home",(req,res)=>{
-    res.sendFile('C:/Users/Raj/socialmedia/client/build/index.html');});
+    res.sendFile(path.join(__dirname,"client","build","index.html"));});
   
 }else {
   app.get("/",(req,res)=>{
