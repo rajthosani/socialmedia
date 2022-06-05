@@ -72,7 +72,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
       console.error(error);
     }
   });  
-//const PORT= process.env.PORT || 8800;
+const PORT= process.env.PORT || 8800;
 //const PORT=8800;
 app.listen(PORT,()=>{
   console.log('backend is running');
