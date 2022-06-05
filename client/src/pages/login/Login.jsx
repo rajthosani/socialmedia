@@ -17,9 +17,9 @@ export default function Login() {
   const handlesubmit=async(e)=>{
     e.preventDefault();
     let data={email: email.current.value,password: password.current.value};
-    const res=await axios.post('http://localhost:8800/api/auth/login',data);
+    const res=await axios.post('https://evening-scrubland-32847.herokuapp.com/api/auth/login',data);
     
-    dispatch(setUser(res.data));
+    dispatch(setUser(res?.data));
     navigate('/');
 
   }

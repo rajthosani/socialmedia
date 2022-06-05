@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 
 export default function Topbar() {
   const {user} = useSelector(state=>state.UserReducer);
-  const PF='http://localhost:8800/images/';
+  const PF='https://evening-scrubland-32847.herokuapp.com/images/';
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -39,7 +39,7 @@ export default function Topbar() {
             <span className="topbarIconBadge">1</span>
           </div>
         </div>
-          <Link to={`/profile/${user.username}`}>
+          <Link to={`/profile/${user?.username}`}>
             <img
               src={
                 user.profilePicture

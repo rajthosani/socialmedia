@@ -9,7 +9,6 @@ export default function Register() {
   const password = useRef();
   const passwordAgain = useRef();
   const navigate = useNavigate();
-  const url='http://localhost:8800';
 
   const handleClick = async (e) => {
     e.preventDefault();
@@ -22,7 +21,7 @@ export default function Register() {
         password: password.current.value,
       };
       try {
-        await axios.post("http://localhost:8800/api/auth/register", user);
+        await axios.post("https://evening-scrubland-32847.herokuapp.com/api/auth/register", user);
         navigate('/login');
       } catch (err) {
         console.log(err);

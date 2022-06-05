@@ -10,13 +10,12 @@ import { useParams } from "react-router";
 
 export default function Profile() {
   const username=useParams().username;
-  //console.log(username);
   //const {user} = useSelector(state=>state.UserReducer);
   const [user,setuser]=useState({});
-  const PF='http://localhost:8800/images/';
+  const PF='https://evening-scrubland-32847.herokuapp.com/images/';
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`http://localhost:8800/api/users?username=${username}`);
+      const res = await axios.get(`https://evening-scrubland-32847.herokuapp.com/api/users?username=${username}`);
       //console.log(res.data);
       setuser(res.data);
     };
@@ -46,13 +45,13 @@ export default function Profile() {
               />
             </div>
             <div className="profileInfo">
-                <h4 className="profileInfoName">{user.username}</h4>
-                <span className="profileInfoDesc">{user.desc}</span>
+                <h4 className="profileInfoName">{user?.username}</h4>
+                <span className="profileInfoDesc">{user?.desc}</span>
             </div>
           </div>
           <div className="profileRightBottom">
-            <Feed username={username}/>
-            <Rightbar otheruser={user}/>
+            {username?<Feed username={username}/>:<></>}
+            {user?<Rightbar otheruser={user}/>:<></>}
           </div>
         </div>
       </div>

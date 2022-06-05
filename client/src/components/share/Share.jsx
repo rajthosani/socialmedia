@@ -6,14 +6,14 @@ import {useSelector} from 'react-redux';
 
 export default function Share() {
   const {user}=useSelector(state=>state.UserReducer);
-  const PF='http://localhost:8800/images/';
+  const PF='https://evening-scrubland-32847.herokuapp.com/images/';
   const [file, setFile] = useState(null);
   const desc=useRef();
 
   const submitHandler = async (e) => {
     e.preventDefault();
     const newPost = {
-      userId: user.userId,
+      userId: user?.userId,
       desc: desc.current.value,
     };
     if (file) {
@@ -24,11 +24,11 @@ export default function Share() {
       newPost.img = fileName;
       console.log(newPost);
       try {
-        await axios.post("http://localhost:8800/api/upload", data);
+        await axios.post("https://evening-scrubland-32847.herokuapp.com/api/upload", data);
       } catch (err) {}
     }
     try {
-      await axios.post("http://localhost:8800/api/posts", newPost);
+      await axios.post("https://evening-scrubland-32847.herokuapp.com/api/posts", newPost);
       window.location.reload();
     } catch (err) {}
   };
@@ -44,7 +44,7 @@ export default function Share() {
                 : PF + "person/noAvatar.png"
             } alt="" />
           <input
-            placeholder={"What's in your mind " + user.username + "?"}
+            placeholder={"What's in your mind " + user?.username + "?"}
             className="shareInput"
             ref={desc}
           />

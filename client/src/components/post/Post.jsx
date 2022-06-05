@@ -9,16 +9,16 @@ import {Link} from 'react-router-dom';
 
 export default function Post({ post }) {
     const {user} = useSelector(state=>state.UserReducer);
-    const [like,setLike] = useState(post.likes.length);
+    const [like,setLike] = useState(post?.likes.length);
     const [isLiked,setIsLiked] = useState(false);
-    const PF='http://localhost:8800/images/';
+    const PF='https://evening-scrubland-32847.herokuapp.com/images/';
     useEffect(() => {
-      setIsLiked(post.likes.includes(user.userId));
-    }, [user.userId, post.likes]);
+      setIsLiked(post?.likes.includes(user?.userId));
+    }, [user?.userId, post?.likes]);
   
     const likeHandler =()=>{
       try {
-        axios.put(`http://localhost:8800/api/posts/${post._id}/like`,  {userId:user.userId} );
+        axios.put(`https://evening-scrubland-32847.herokuapp.com/api/posts/${post?._id}/like`,  {userId:user?.userId} );
       } catch (err) {}
       setLike(isLiked ? like-1 : like+1)
       setIsLiked(!isLiked)
@@ -26,7 +26,7 @@ export default function Post({ post }) {
     const [pic,setpic]=useState();
     const [username,setusername]=useState();
     
-    const profilephoto=axios.get(`http://localhost:8800/api/users/${post?.userId}`).then((response)=>response.data.profilePicture);
+    const profilephoto=axios.get(`https://evening-scrubland-32847.herokuapp.com/api/users/${post?.userId}`).then((response)=>response.data.profilePicture);
     const setprofilephoto=()=>{
       profilephoto.then((a)=>{
         
@@ -35,7 +35,7 @@ export default function Post({ post }) {
     };
     setprofilephoto();  
 
-    const userdataname=axios.get(`http://localhost:8800/api/users/${post?.userId}`).then((response)=>response.data.username);
+    const userdataname=axios.get(`https://evening-scrubland-32847.herokuapp.com/api/users/${post?.userId}`).then((response)=>response.data.username);
     const setuserdataname=()=>{
       userdataname.then((a)=>{
         
@@ -68,7 +68,7 @@ export default function Post({ post }) {
           </div>
           <div className="postCenter">
             <span className="postText">{post?.desc}</span>
-            <img className="postImg" src={PF+post.img} alt="" />
+            <img className="postImg" src={PF+post?.img} alt="" />
           </div>
           <div className="postBottom">
             <div className="postBottomLeft">
@@ -77,7 +77,7 @@ export default function Post({ post }) {
               <span className="postLikeCounter">{like} people like it</span>
             </div>
             <div className="postBottomRight">
-              <span className="postCommentText">{post.comment} comments</span>
+              <span className="postCommentText">{post?.comment} comments</span>
             </div>
           </div>
         </div>

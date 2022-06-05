@@ -11,7 +11,7 @@ export default function Feed({username}) {
   
   useEffect(() => {
     const fetchPosts = async () => {
-      const res = username? await axios.get(`http://localhost:8800/api/posts/profile/${username}`):await axios.get(`http://localhost:8800/api/posts/timeline/${user?._id}`);
+      const res = username? await axios.get(`https://evening-scrubland-32847.herokuapp.com/api/posts/profile/${username}`):await axios.get(`https://evening-scrubland-32847.herokuapp.com/api/posts/timeline/${user?._id}`);
        //console.log('res is ',res);
       setposts(res.data);
 
@@ -24,8 +24,8 @@ export default function Feed({username}) {
       <div className="feed">
         <div className="feedWrapper">
           {(!username || username === user.username) && <Share />}
-          {posts.map((p) => (
-            <Post key={p.id} post={p} />
+          {posts?.map((p) => (
+            <Post key={p._id} post={p} />
           ))}
         </div>
       </div>

@@ -15,21 +15,21 @@ export default function Rightbar({otheruser}) {
 
     const [friends, setfriends] = useState([]);
     const [followed, setfollowed] = useState(
-      user?.followings.includes(otheruser?.id)
+      otheruser&&user?.followings.includes(otheruser?.id)
     );
-    const PF='http://localhost:8800/images/';
+    const PF='https://evening-scrubland-32847.herokuapp.com/images/';
 
 
     const handleClick = async () => {
       try {
         if (followed) {
-          await axios.put(`http://localhost:8800/api/users/${otheruser?.userId}/unfollow`, {
-            userId: user.userId,
+          await axios.put(`https://evening-scrubland-32847.herokuapp.com/api/users/${otheruser?.userId}/unfollow`, {
+            userId: user?.userId,
           });
           
         } else {
-          await axios.put(`http://localhost:8800/api/users/${otheruser?.userId}/follow`, {
-            userId: user.userId,
+          await axios.put(`https://evening-scrubland-32847.herokuapp.com/api/users/${otheruser?.userId}/follow`, {
+            userId: user?.userId,
           });
          
         }
@@ -41,7 +41,7 @@ export default function Rightbar({otheruser}) {
     useEffect(() => {
       const getFriends = async () => {
         try {
-          const friendList = await axios.get(`http://localhost:8800/api/users/friends/${otheruser?.userId}`);
+          const friendList = await axios.get(`https://evening-scrubland-32847.herokuapp.com/api/users/friends/${otheruser?.userId}`);
           setfriends(friendList.data);
         } catch (err) {
           console.log(err);
@@ -51,7 +51,7 @@ export default function Rightbar({otheruser}) {
     }, [otheruser]);
 
     const HomeRightbar = () => {
-      const PF='http://localhost:8800/images/';
+      const PF='https://evening-scrubland-32847.herokuapp.com/images/';
       return (
         <>
           <div className="birthdayContainer">
@@ -63,8 +63,8 @@ export default function Rightbar({otheruser}) {
           <img className="rightbarAd" src={PF+"ad.png"} alt="" />
           <h4 className="rightbarTitle">Online Friends</h4>
           <ul className="rightbarFriendList">
-            {Users.map((u) => (
-              <Online key={u.id} user={u} />
+            {Users?.map((u) => (
+              <Online key={u._id} user={u} />
             ))}
           </ul>
         </>
@@ -74,7 +74,7 @@ export default function Rightbar({otheruser}) {
     const ProfileRightbar = () => {
       return (
         <>
-        {otheruser?.username !== user.username && (
+        {otheruser?.username !== user?.username && (
           <button className="rightbarFollowButton" onClick={handleClick}>
             {followed ? "Unfollow" : "Follow"}
             {followed ? <Remove /> : <Add />}
@@ -99,7 +99,7 @@ export default function Rightbar({otheruser}) {
         <h4 className="rightbarTitle">User friends</h4>
         <div className="rightbarFollowings">
           {friends?.map((friend) => (
-            <Link
+            <Link key={friend._id}
               to={"/profile/" + friend.username}
               style={{ textDecoration: "none" }}
             >
