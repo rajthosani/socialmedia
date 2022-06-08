@@ -4,7 +4,7 @@ import { useContext, useRef,useReducer } from "react";
 import { CircularProgress } from "@material-ui/core";
 import { AuthContext } from "../../context/AuthContext";
 //import AuthReducer from '../../context/AuthReducer';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {setUser} from '../../components/redux/UserActions';
 import axios from 'axios';
 import {useDispatch} from 'react-redux';
@@ -31,6 +31,7 @@ export default function Login() {
           <h3 className="loginLogo">Lamasocial</h3>
           <span className="loginDesc">
             Connect with friends and the world around you on Lamasocial.
+            For demonstration use email :safak@gmail.com and password :123456abcd
           </span>
         </div>
         <div className="loginRight">
@@ -39,9 +40,11 @@ export default function Login() {
             <input placeholder="Password" type='password' required minLength='6' className="loginInput" ref={password}/>
             <button className="loginButton" type="submit" >Login</button>
             <span className="loginForgot">Forgot Password?</span>
-            <button className="loginRegisterButton">
-              Create a new account
-            </button>
+            <Link to="/register">
+              <button className="loginRegisterButton">
+                Create a new account
+              </button>
+            </Link>
           </form>
         </div>
       </div>
